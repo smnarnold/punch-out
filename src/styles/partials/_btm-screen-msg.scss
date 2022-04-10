@@ -1,0 +1,16 @@
+.btm-screen-msg {
+  position: relative;
+  font-size: clamp(14px, 2.25vmin, 30px);
+  padding: 1em 1em 3em;
+  transition: opacity 0.5s;
+
+  &.is-flashing & {
+    &__wrapper {
+      animation: fade-in 0.3s linear alternate infinite;
+    }
+  }
+
+  .mobile-device & { 
+    margin-bottom: 50px; 
+  }
+}

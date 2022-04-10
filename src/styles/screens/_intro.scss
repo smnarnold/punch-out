@@ -1,0 +1,44 @@
+.intro {
+  position: relative;
+  background-image: url('../../img/intro/mike-tyson-bg-tile.png');
+  background-size: 25vw auto;
+  text-align: center;
+  
+  .screen__safe-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  &__portrait {
+    display: block;
+    min-width: 200px;
+    width: 30vmin;
+    border: solid 0.75vmin white;
+    margin: 0 auto;
+  }
+  
+  &__msg {
+    color: var(--light-blue);
+    background-color: #000;
+    line-height: 1.75;
+    padding: 1em;
+  }
+  
+  &__title {
+    font-family: verdana, sans-serif;
+    font-weight: 900;
+    color: var(--green);
+    text-align: center;
+    line-height: 0.75;
+    letter-spacing: -0.05em;
+    -webkit-text-stroke: 0.05em #fff;
+    text-transform: uppercase;
+    margin: 0 0 0.25em;
+    transform: scaleX(1.2);
+  }
+  
+  &__lastname {
+    font-size: 1.4em;
+  }
+}

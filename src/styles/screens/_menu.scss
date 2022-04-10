@@ -1,0 +1,182 @@
+.menu {
+  .screen__safe-zone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  &__tagline {
+    color: var(--light-blue);
+    font-style: normal;
+    padding: 3em 1em 1em;
+  }
+  
+  &__title {
+    $el: &;
+    
+    position: relative;
+    display: flex;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    align-items: center;
+    font-size: 7vmin;
+    line-height: 1;
+    background-color: var(--blue);
+    background-image: linear-gradient(90deg, black (2vmin - 1.5vmin), transparent 1%),
+      linear-gradient(black (2vmin - 1.5vmin), transparent 1%);
+    background-size: 1.5vmin 1.5vmin;
+    padding: 1.75em 1em;
+    border-top: solid 0.5vmin var(--blue);
+    border-bottom: solid 0.5vmin var(--blue);
+    
+    &__skratch {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+        
+      path { fill: car(--cyan); };
+    }
+    
+    &__glove {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 90%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    
+    &__gradient {
+      position: relative;
+      background-image: linear-gradient(var(--salmon), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+  }
+  
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  &__btn {
+    position: relative;
+    background-color: transparent;
+    color: var(--salmon);
+    font-size: inherit;
+    font-family: inherit;
+    border: 0;
+    padding: 0.5em 0;
+    width: 20em;
+    
+    &--selected {
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        background-image: url(https://i.smnarnold.com/punch-out/imgs/menu/btn-glove.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 3em;
+        width: 3em;
+      }
+      
+      &::before {
+        left: 0;
+        transform: translateY(-50%);
+      }
+      
+      &::after {
+        right: 0;
+        transform: translateY(-50%) scaleX(-1);
+      }
+    }
+  }
+  
+  &__pwd {
+    opacity: 0;
+    margin-top: 0.5em;
+    color: var(--light-green);
+    
+    .menu__btn--continue.menu__btn--selected + & {
+      opacity: 1;
+    }
+  }
+  
+  &__msg {
+    color: var(--dark-blue);
+    // margin-top: -9vmin;
+    opacity: 0;
+  }
+  
+  &__footer {
+    font-size: 2vmin;
+    padding: 1em 1em 3em;
+  }
+  
+  &.game-started {
+    background-color: var(--cyan);
+    opacity: 0;
+    transition: background-color 0.2s 0.8s linear, opacity 0.25s 1.8s linear; 
+  }
+  
+  &.game-started & {
+    &__title {
+      animation: menu-title-flashes forwards 2s linear;
+      
+      &__skratch {
+        opacity: 1;
+        transition: opacity 0.2s 0.8s linear; 
+      }
+      
+      &__glove {
+        animation: menu-title-glove forwards 2s linear;
+      }
+    }
+    
+    &__menu {
+      opacity: 0;
+      transition: opacity 0.2s 0.8s linear; 
+    }
+    
+    &__msg {
+      opacity: 1;
+      transition: opacity 0.2s 0.8s linear; 
+    }
+  }
+}
+
+@keyframes menu-title-flashes {
+  0%, 20%, 40% {
+    background-color: var(--blue);
+    border-top: solid 0.5vmin var(--blue);
+    border-bottom: solid 0.5vmin var(--blue);
+  }
+	10%, 30%, 50%, 100% {
+    background-color: var(--cyan);
+    border-top: solid 0.5vmin var(--cyan);
+    border-bottom: solid 0.5vmin var(--cyan);
+  }
+}
+
+@keyframes menu-title-glove {
+	0%, 20%, 40% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.9);
+  }
+  10%, 30%, 50%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

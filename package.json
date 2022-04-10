@@ -1,0 +1,21 @@
+{
+  "name": "punch-out",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.9.0"
+  },
+  "dependencies": {
+    "gsap": "^3.10.2",
+    "howler": "^2.2.3",
+    "lodash.debounce": "^4.0.8",
+    "lodash.merge": "^4.6.2",
+    "nes-cntlr": "^4.0.3",
+    "sass": "^1.50.0"
+  }
+}

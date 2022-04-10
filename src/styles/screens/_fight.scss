@@ -1,0 +1,83 @@
+.fight {
+  $h: 100vmin;
+
+  .screen__safe-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue);
+  }
+
+  .little-mac {
+    position: relative;
+    height: $h;
+    aspect-ratio: 1 / 2;
+    
+    .sprite-sheet {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('../../img/fight/little-mac-sprite-sheet.png');
+      background-size: 1000% auto;
+    }
+    
+    &.right { transform: scaleX(-1); }
+    
+    &.idle .sprite-sheet { animation: idle 0.4s steps(2) infinite alternate; }
+    &.dodge .sprite-sheet { animation: dodge 0.3s steps(2); }
+    &.block .sprite-sheet { animation: block 0.15s steps(1) forwards; }
+    &.body-blow .sprite-sheet { animation: body-blow 0.15s steps(3) 2 alternate; }
+    &.punch-to-face .sprite-sheet { animation: punch-to-face 0.15s steps(3) 2 alternate; }
+    &.uppercut .sprite-sheet { animation: uppercut 0.45s steps(6); }
+  }
+  
+  @keyframes idle {
+    from { background-position: 0vmin 0; }
+    to { background-position: 0vmin -200vmin; }
+  }
+  
+  @keyframes dodge {
+    0%, 100% {
+      background-position: -50vmin 0;
+      transform: translateX(0);
+    }
+    50% {
+      background-position: -50vmin -200vmin;
+      transform: translateX(-25%);
+    }
+  }
+  
+  @keyframes block {
+    from { background-position: -100vmin 0; }
+    to { background-position: -100vmin -100vmin; }
+  }
+  
+  @keyframes body-blow {
+    0% { background-position: -200vmin 0; }
+    100% { background-position: -200vmin -300vmin; }
+  }
+  
+  @keyframes punch-to-face {
+    0% { 
+      background-position: -250vmin 0; 
+      transform: translateY(0);
+    }
+    100% { 
+      background-position: -250vmin -300vmin; 
+      transform: translateY(-5%);
+    }
+  }
+  
+  @keyframes uppercut {
+    0% { 
+      background-position: -300vmin 0; 
+      transform: translateY(0);
+    }
+    100% { 
+      background-position: -300vmin -600vmin; 
+      transform: translateY(-10%);
+    }
+  }
+}

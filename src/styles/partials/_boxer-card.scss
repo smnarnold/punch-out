@@ -1,0 +1,12 @@
+.boxer-card {
+  &__picture {
+    width: 30vmin;
+    border: solid 0.75vmin white;
+  }
+  
+  &__rank {
+    display: block;
+    font-style: normal;
+    color: var(--green);
+  }
+}

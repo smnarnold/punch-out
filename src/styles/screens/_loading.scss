@@ -1,0 +1,539 @@
+@use '../partials/controls-legend';
+
+.loading {
+  --grey-0: #9c9c9c;
+  --grey-1: #8C8C8C;
+  --grey-2: #B0B0B0;
+  --grey-3: #8C8C8C;
+  
+  background-color: #3409b8;
+  transition: opacity 0.75s 4.5s linear;
+
+  * { image-rendering: auto; }
+  
+  .screen__safe-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+  }
+  
+  .box {
+    --depth: 9vmin;
+
+    position: relative;
+    transform-style: preserve-3d;
+
+    &__side {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--grey-0);
+
+      &--left,
+      &--right {
+        width: var(--depth);
+        transform-origin: 0 0;
+        background-color: var(--grey-1);
+      }
+
+      &--left { 
+        transform: rotateY(90deg);
+      }
+
+      &--right {
+        left: 100%;
+        transform: rotateY(-90deg) translateX(-100%);
+      }
+
+      &--back { 
+        transform: rotateY(180deg) translateZ(var(--depth));
+      }
+
+      &--top {
+        transform-origin: 0 100%;
+        top: auto;
+        height: var(--depth);
+        bottom: 100%;
+        background-color: var(--grey-2);
+        transform: rotateX(90deg);
+      }
+
+      &--bottom {
+        background-color: var(--grey-2);
+        transform-origin: 0 0;
+        top: 100%;
+        height: var(--depth);
+        transform: rotateX(-90deg);
+      }
+    }
+  }
+  
+  .stripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(180deg, transparent 1vmin, rgba(0,0,0,0.075) 1vmin, rgba(0,0,0,0.075) 2vmin, var(--grey-1) 2vmin);
+    background-size: 100% 2vmin;
+  }
+  
+  /*--- Cartridge ------------------------- */
+  .cartridge {
+    position: relative;
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+    z-index: 1;
+
+    &__picture {
+      position: absolute;
+      top: 0;
+      left: 2vmin;
+      width: 85%;
+      aspect-ratio: 7 / 10;
+      border-radius: 0 0 0.75vmin 0.75vmin;
+      background-color: #080808;
+      background-image: url('../../img/loading/cartridge-label.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      box-shadow: inset 0 -1vmin 2vmin rgba(0,0,0,0.05);
+    }
+
+    &__triangle {
+      position: absolute;
+      bottom: 0;
+      left: 3vmin;
+      width: 0; 
+      height: 0; 
+      border-left: 2vmin solid transparent;
+      border-right: 2vmin solid transparent;
+      border-top: 3.75vmin solid rgba(0,0,0,0.05);
+    }
+
+    .touch-device & {
+      animation: cartridge 75s linear infinite;
+    }
+    
+    .body,
+    .bottom {
+      position: relative;
+    }
+
+    .body {
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      width: 60vmin;
+      aspect-ratio: 1 / 1;
+
+      &__left {
+        position: relative;
+        width: 15%;
+        height: 100%;
+      }
+
+      &__middle {
+        display: block;
+        position: relative;
+        width: 22%;
+        height: 100%;
+        overflow: visible;
+        transform-style: preserve-3d;
+
+        &__top {
+          --depth: 3vmin;
+
+          position: relative;
+          width: 100%;
+          height: 18%;
+          transform: translateZ(-3vmin);
+
+          .box__side {
+            &--front,
+            &--back {
+              box-shadow: inset 0 -6vmin 4.5vmin rgba(0,0,0,0.15);
+            }
+          }
+        }
+
+        &__bottom {
+          position: relative;
+          width: 100%;
+          height: 82%;
+        }
+      }
+
+      &__right {
+        position: relative;
+        width: 63%;
+        height: 100%;
+
+        .box__side--top {
+          &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1.5vmin;
+            width: 75%;
+            height: 50%;
+            background-image: url("https://assets.codepen.io/1189183/witch-n-wiz-top.jpg");
+            background-size: cover;
+          }
+        }
+      }
+    }
+
+    .bottom {
+      top: -1px;
+      left: 50%;
+      width: 51vmin;
+      aspect-ratio: 5 / 1;
+      transform: translateX(-50%);
+
+      .stripes__wrapper {
+        top: 0;
+        left: 8.9%;
+        position: absolute;
+        width: 25.75%;
+        height: 100%;
+
+        .stripes {
+          background-position: 0 -1.13vmin;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 7.5vmin;
+            border-radius: 0.75vmin 0.75vmin 0 0;
+            background-color: var(--grey-0);
+            box-shadow: inset -0.37vmin 0 1.5vmin rgba(0,0,0,0.1);
+          }
+        }
+      }
+
+      .box__side--bottom {
+        background-color: #000;
+        box-shadow: inset 0 -0.75vmin 4.5vmin rgba(255,255,255,0.3);
+        border: solid 2.25vmin var(--grey-2);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 7%;
+          width: 86%;
+          height: 12%;
+          background-color: #fff;
+          transform: translateY(-50%);
+        }
+      }
+    }
+
+    .hole {
+      position: absolute;
+      width: 2.25vmin;
+      height: 2.25vmin;
+      background-image: radial-gradient(rgba(0,0,0,1), rgba(0,0,0,0.5));
+      border-radius: 50%;
+      transform: rotateX(180deg) translateZ(9vmin);
+      opacity: 0.7;
+
+      &--1 {
+        left: 1.5vmin;
+        bottom: 1.5vmin;
+      }
+
+      &--2 {
+        right: 1.5vmin;
+        bottom: 1.5vmin;
+      }
+
+      &--3 {
+        left: 50%;
+        bottom: 24vmin;
+        transform: translateX(-50%) rotateX(180deg) translateZ(9vmin);
+      }
+    }
+
+    .back-large {
+      position: absolute;
+      bottom: 4.5vmin;
+      left: 50%;
+      width: 74%;
+      height: 30%;
+      background-color: rgba(0,0,0,0.1);
+      transform: translateX(-50%) rotateX(180deg) translateZ(9vmin);
+      box-shadow: inset 0 0.75vmin 0.75vmin rgba(255,255,255, 0.15), inset 0 -0.75vmin 0.75vmin rgba(0,0,0, 0.15);
+    }
+
+    .back-small {
+      position: absolute;
+      bottom: 3vmin;
+      left: 50%;
+      width: 50%;
+      height: 70%;
+      background-color: rgba(0,0,0,0.1);
+      transform: translateX(-50%) rotateX(180deg) translateZ(9vmin);
+      box-shadow: inset 0 0.75vmin 0.75vmin rgba(255,255,255, 0.15), inset 0 -0.75vmin 0.75vmin rgba(0,0,0, 0.15);
+    }
+  }
+
+  /* ----------------------------- */
+  .nes-bottom,
+  .nes-top {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 200vmin;
+    aspect-ratio: 13/4;
+    transform-style: preserve-3d;
+    transition: transform 0.75s 1.5s linear;
+  }
+  
+  .nes-bottom {
+    background-color: var(--grey-1);
+    transform: translate3d(-50%, 150%, -20vmin);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 25%;
+      width: 50%;
+      height: 25%;
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.5));
+    }
+    
+    .low {
+      position: absolute;
+      left: 0;
+      bottom: 100%;
+      width: 100%;
+      height: 27%;
+      transform-origin: 50% 100%;
+      transform: rotateX(90deg);
+      background-color: var(--grey-2);
+    }
+  }
+  
+  .nes-top {
+    z-index: 1;
+    transform: translate(-50%, 150%);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 35%;
+      background-image: linear-gradient(to right, var(--grey-0) 0%, var(--grey-0) 25%, transparent 25%, transparent 75%, var(--grey-0) 75%, var(--grey-0) 100%);
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 70%;
+      background-color: var(--grey-0);
+    }
+    
+    .side {
+      position: absolute;
+      bottom: 100%;
+      width: 25%;
+      height: 60%;
+      background-color: var(--grey-2);
+      transform-origin: 50% 100%;
+      transform: rotateX(90deg);
+      
+      &--left {
+        left: 0;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 48%;
+          width: 50%;
+          height: 100%;
+          background-color: rgb(47, 51, 53);
+        }
+      }
+      &--right { right: 0; }
+    }
+    
+    .texture {
+      position: absolute;
+      top: 0;
+      left: 12%;
+      width: 12.5%;
+      height: 300%;
+      z-index: 1;
+      
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 9vmin;
+        background-color: rgb(47, 51, 53);
+        z-index: 1;
+      }
+      
+      &::after { transform: translateY(102%);}
+    }
+
+    .door {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 30%;
+      transform-origin: 50% 100%;
+      transform: translateX(-50%) rotateX(0deg);
+      transform-style: preserve-3d;
+      transition: transform 0.75s 3s;
+
+      &__front {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--grey-2);
+        transform: translateZ(18.5vmin);
+      }
+      
+      &__top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--grey-1);
+        transform-origin: 50% 100%;
+        transform: rotateX(90deg) translateY(100%);
+      }
+      
+      .logo-nintendo {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        color: rgb(172, 60, 102);
+        font-size: 1.75vmin;
+        line-height: 1.2;
+        padding: 1.5vmin;
+        transform: translateY(-50%) rotate(180deg);
+        
+        strong {
+          display: block;
+          text-indent: -0.1em;
+          font-size: 2em;
+          font-family: verdana, sans-serif;
+        }
+      }
+    }
+    
+    @keyframes door {
+      to { transform: translateX(-50%) rotateX(90deg); }
+    }
+  }
+
+  .btm-screen-msg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  @keyframes cartridge-in {
+    0%, 15% { transform: scale(1); }
+    7.5% { transform: scale(0.95); }
+    40% { transform: scale(1) rotateY(360deg); }
+    95% { 
+      transform: translateY(52vh); 
+    }
+    96%, 100% { 
+      visibility: hidden;
+      transform: translateY(52vh); 
+    }
+  }
+
+  @keyframes nes-top {
+    0%, 100% {
+      transform: translate(-50%, 150%);
+    }
+    25%, 75% {
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @keyframes nes-bottom {
+    0%, 100% {
+      transform: translate3d(-50%, 150%, -20vmin);
+    }
+    25%, 75% {
+      transform: translate3d(-50%, 0, -20vmin);
+    }
+  }
+   
+  @media (orientation: landscape) {
+    @keyframes cartridge-in {
+      0%, 15% { transform: scale(1); }
+      7.5% { transform: scale(0.95); }
+      40% { transform: scale(1) rotateY(360deg); }
+      95% { 
+        transform: translateY(62vh); 
+      }
+      96%, 100% { 
+        visibility: hidden;
+        transform: translateY(62vh); 
+      }
+    }
+
+    @keyframes nes-top {
+      0%, 100% {
+        transform: translate(-50%, 150%);
+      }
+      25%, 75% {
+        transform: translate(-50%, 50%);
+      }
+    }
+
+    @keyframes nes-bottom {
+      0%, 100% {
+        transform: translate3d(-50%, 150%, -20vmin);
+      }
+      25%, 75% {
+        transform: translate3d(-50%, 50%, -20vmin);
+      }
+    }
+  }
+  
+
+  /*--- Animate ------------------- */
+  &.animate {
+    opacity: 0;
+    
+    .btm-screen-msg { opacity: 0; }
+    
+    .cartridge { animation: cartridge-in 4s forwards; }
+    .nes-bottom { animation: nes-bottom 3s 1.5s; }
+    .nes-top { animation: nes-top 3s 1.5s; }
+    
+    .door { transform: translateX(-50%) rotateX(90deg); }
+  }
+}

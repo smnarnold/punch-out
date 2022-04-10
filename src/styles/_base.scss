@@ -1,0 +1,26 @@
+@font-face {
+  src: url("src/fonts/punch-out.woff2") format("woff2");
+  font-family: "punch-out";
+}
+
+* {
+  box-sizing: border-box;
+  image-rendering: pixelated;
+}
+
+html {
+  background-color: black;
+  color: white;
+  font-family: var(--regular-font);
+  font-size: 3vmin;
+  line-height: 1.5;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
